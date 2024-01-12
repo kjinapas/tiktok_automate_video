@@ -4,16 +4,22 @@ import random
 import os
 from moviepy.editor import  AudioFileClip
 from get_quotes import *
+import string
 
-from moviepy.editor import clips_array
-
-import datetime
-time = datetime.datetime.now()
 
 # Directory containing your video files
 video_directory = "video"
 audio_directory = "music"
 
+
+
+
+
+def generate_name():
+    letters = string.ascii_lowercase
+    name = ''.join(random.choice(letters) for i in range(4))  # 4 letters
+    number = random.randint(0, 9)  # single-digit number
+    return name + str(number)
 
 #define screensize 
 screensize =(1000,1920)
@@ -59,7 +65,7 @@ def gen_clip_v1(number):
 
     video_clip = clip.set_audio(audio_clip)
     final_clip = mpe.CompositeVideoClip([video_clip, text_clip]).set_duration(10)
-    final_clip.write_videofile(f"out_put/day_{time.day}_{time.minute}_clip.mp4")
+    final_clip.write_videofile(f"out_put/{generate_name()}_clip.mp4")
 
 #----------------------------------------------------------------------------
 
@@ -88,7 +94,7 @@ def gen_clip_v2(number):
 
         video_clip = clip.set_audio(audio_clip)
         final_clip = mpe.CompositeVideoClip([video_clip, text_clip]).set_duration(10)
-        final_clip.write_videofile(f"out_put/day_{time.day}_{time.minute}_clip{number+1}.mp4")
+        final_clip.write_videofile(f"out_put/{generate_name()}.mp4")
 
 #----------------------------------------------------------------------------
 
@@ -120,13 +126,13 @@ def gen_clip_text(text):
 
     video_clip = clip.set_audio(audio_clip)
     final_clip = mpe.CompositeVideoClip([video_clip, text_clip]).set_duration(10)
-    final_clip.write_videofile(f"out_put/day_{time.day}_{time.minute}_clip.mp4")
+    final_clip.write_videofile(f"out_put/{generate_name()}_clip.mp4")
 
 
 
 
 delete_video_files("out_put")
-
-gen_clip_v1(1)
+for i in range(3):    
+    gen_clip_v1(1)
 
 
