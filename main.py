@@ -40,6 +40,7 @@ def gen_clip_v1(number):
     
     text = gen_quotes(number)
     video_file = random.choice(video_files)
+    
     audio_file = random.choice(audio_files)
     clip = mpe.VideoFileClip(video_file)
     audio_clip = AudioFileClip(audio_file)
